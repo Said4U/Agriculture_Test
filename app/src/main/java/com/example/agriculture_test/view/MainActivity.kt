@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(),  CustomAdapter.ItemClickListener {
 
         searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                mainActivityViewModel.getMedication(query.toString(), 0)
+                mainActivityViewModel.getSearchMedication(query.toString(), 0)
                 return true
             }
 
@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity(),  CustomAdapter.ItemClickListener {
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                mainActivityViewModel.itemSaveList.clear()
                 mainActivityViewModel.getMedication("", 0)
             }
         })

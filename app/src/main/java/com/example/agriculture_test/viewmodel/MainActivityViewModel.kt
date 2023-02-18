@@ -33,6 +33,17 @@ class MainActivityViewModel {
         })
     }
 
+    fun getSearchMedication(search: String, offset: Int){
+        api.getMedication(search, offset).enqueue(object : Callback<List<DrugsItem>> {
+            override fun onResponse(call: Call<List<DrugsItem>>, response: Response<List<DrugsItem>>) {
+                _medication.postValue(response.body())
+            }
+            override fun onFailure(call: Call<List<DrugsItem>>, t: Throwable) {
+                Log.e("Debug", t.message.toString())
+            }
+        })
+    }
+
     fun getMedicationCard(id: Int){
         api.getMedicationCard(id).enqueue(object : Callback<DrugsItem> {
             override fun onResponse(call: Call<DrugsItem>, response: Response<DrugsItem>) {
